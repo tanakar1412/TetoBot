@@ -3,6 +3,7 @@ from discord.ext import commands
 import yt_dlp as youtube_dl
 import asyncio
 import random
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -13,7 +14,8 @@ bot.song_queue = []
 bot.is_looping = False
 bot.volume = 0.5  # Default volume (0.0 to 1.0)
 
-FFMPEG_PATH = "D:/ffmpeg-2025-03-31-git-35c091f4b7-essentials_build/bin/ffmpeg.exe"
+# For Render: let it find ffmpeg in the environment
+FFMPEG_PATH = "ffmpeg"  # Use this for hosting instead of local path
 
 @bot.event
 async def on_ready():
@@ -219,5 +221,5 @@ async def leave(ctx):
     else:
         await ctx.send("❗ I'm not in a voice channel.")
 
-# 🚨 Add your bot token here
-bot.run("")
+# ✅ Run the bot using a secure environment variable
+bot.run(os.getenv("DISCORD_TOKEN"))
